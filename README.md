@@ -278,11 +278,11 @@ dx\,dy = \lvert\det J\rvert\,d\xi\,d\eta,
 
 変換後の式は、
 
-```
+$$
 I = \int_{-1}^{1}\int_{-1}^{1}
     f\bigl(\mathbf{F}(\xi,\eta)\bigr)\,
     \lvert\det J\rvert\,d\eta\,d\xi.
-```
+$$
 
 **解説**：  
 - 関数 \(f\) は写像 \(\mathbf{F}(\xi,\eta)\) で評価され、  
