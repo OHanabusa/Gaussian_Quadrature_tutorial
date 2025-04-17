@@ -150,6 +150,10 @@ print(approx)  # -> 13.333333333333334
 
 ---
 
+以下、GitHub Markdown 形式での「4章 2変数ガウス求積法の導出」です。  
+ドキュメントの該当箇所にそのまま貼り付けてご利用ください。
+
+```markdown
 # 4章 │ 2変数ガウス求積法の導出
 
 数値積分を 2 変数関数に拡張するため、まず物理空間と参照空間の座標系を定義し、一次写像とヤコビアン行列を導入します。最後に、一般的な 2 重積分からガウス求積の形に至るまでをステップ・バイ・ステップで示します。
@@ -159,114 +163,98 @@ print(approx)  # -> 13.333333333333334
 ## 4.1 座標の定義とヤコビアン行列
 
 - **物理空間の座標**  
-  \[
-    \mathbf{x} = (x,\,y), \quad (x,y)\in [x_1,x_2]\times[y_1,y_2].
-  \]
+  ```math
+  \mathbf{x} = (x, y), \quad (x,y)\in [x_1, x_2]\times[y_1, y_2].
+  ```
 
 - **参照空間（パラメータ空間）の座標**  
-  \[
-    \boldsymbol{\xi} = (\xi,\,\eta), \quad (\xi,\eta)\in[-1,1]^2.
-  \]
+  ```math
+  \boldsymbol{\xi} = (\xi, \eta), \quad (\xi,\eta)\in[-1,1]^2.
+  ```
 
 参照空間から物理空間へのアフィン一次写像を
-\[
-  \mathbf{x} = \mathbf{F}(\boldsymbol{\xi})
-  = J\,\boldsymbol{\xi} + \mathbf{c},
-\]
+
+```math
+\mathbf{x} = \mathbf{F}(\boldsymbol{\xi}) = J\,\boldsymbol{\xi} + \mathbf{c},
+```
+
 として定義します。ここで
 
-\[
-  J
-  =
-  \begin{pmatrix}
-    \frac{x_2 - x_1}{2} & 0 \\
-    0 & \frac{y_2 - y_1}{2}
-  \end{pmatrix},
-  \qquad
-  \mathbf{c}
-  =
-  \begin{pmatrix}
-    \frac{x_1 + x_2}{2} \\
-    \frac{y_1 + y_2}{2}
-  \end{pmatrix}.
-\]
+```math
+J = \begin{pmatrix}
+\frac{x_2 - x_1}{2} & 0 \\
+0 & \frac{y_2 - y_1}{2}
+\end{pmatrix}, \quad
+\mathbf{c} = \begin{pmatrix}
+\frac{x_1 + x_2}{2} \\
+\frac{y_1 + y_2}{2}
+\end{pmatrix}.
+```
 
 **解説**：  
-- 行列 \(J\) の対角要素が \(x\)、\(y\) それぞれのスケール変換を担い、  
-- ベクトル \(\mathbf{c}\) が区間の中心位置を表します。
+- 行列 \(J\) の対角要素が \(x\)、\(y\) 方向のスケール変換を担い、  
+- ベクトル \(\mathbf{c}\) が領域の中心位置を表します。
 
 ---
 
 ## 4.2 2重積分の一般形
 
-もとの物理空間上の積分は
+物理空間の 2 重積分は、
 
-\[
-  I
-  =
-  \int_{x_1}^{x_2} \int_{y_1}^{y_2} f(x,y)\,\mathrm{d}y\,\mathrm{d}x.
-\]
+```math
+I = \int_{x_1}^{x_2}\int_{y_1}^{y_2} f(x,y)\,dy\,dx.
+```
 
 **解説**：  
-\(\mathrm{d}y\,\mathrm{d}x\) は物理空間の面積要素です。
+\(\,dy\,dx\) は物理空間の面積要素です。
 
 ---
 
 ## 4.3 変数変換とヤコビアンの導入
 
-参照空間の微小面積要素を \(\mathrm{d}\xi\,\mathrm{d}\eta\) とすると、一次写像により
+参照空間の面積要素を \(d\xi\,d\eta\) とすると、
 
-\[
-  \mathrm{d}x\,\mathrm{d}y
-  =
-  \bigl|\det J\bigr|\;\mathrm{d}\xi\,\mathrm{d}\eta,
-\]
-\[
-  \det J
-  =
-  \frac{x_2 - x_1}{2}\times\frac{y_2 - y_1}{2}.
-\]
+```math
+dx\,dy = \lvert\det J\rvert\,d\xi\,d\eta,
+```
+
+```math
+\det J = \frac{x_2 - x_1}{2}\times\frac{y_2 - y_1}{2}.
+```
 
 **解説**：  
-ヤコビアン \(\bigl|\det J\bigr|\) が面積スケーリングを補正し、参照空間上の面積要素を物理空間上の面積要素に変換します。
+ヤコビアン \(\lvert\det J\rvert\) が面積スケールを補正し、参照空間の要素を物理空間に変換します。
 
 ---
 
 ## 4.4 参照空間上の積分式
 
-変数変換を適用すると、
+変換後の式は、
 
-\[
-  I
-  =
-  \int_{-1}^{1} \int_{-1}^{1}
-    f\bigl(\mathbf{F}(\xi,\eta)\bigr)\;
-    \bigl|\det J\bigr|\;\mathrm{d}\eta\,\mathrm{d}\xi.
-\]
+```math
+I = \int_{-1}^{1}\int_{-1}^{1}
+    f(\mathbf{F}(\xi,\eta))\,
+    \lvert\det J\rvert\,d\eta\,d\xi.
+```
 
 **解説**：  
-- 関数 \(f\) の引数が \(\mathbf{F}(\xi,\eta)\) によって物理空間の点にマッピングされ、  
-- ヤコビアン \(\bigl|\det J\bigr|\) が面積要素の変形を補正します。
+- 関数 \(f\) は引数に写像 \(\mathbf{F}(\xi,\eta)\) を用いて物理空間の点を評価し、  
+- ヤコビアンで面積要素を補正します。
 
 ---
 
 ## 4.5 2変数ガウス求積公式
 
-参照空間上で 1 次元ガウス求積をそれぞれの変数に適用し、組み合わせることで
+参照空間上のガウス点 \(\{\xi_i,w_i\}\) と \(\{\eta_j,w_j\}\) を用いて、
 
-\[
-  I
-  \approx
-  \sum_{i=1}^{n}\sum_{j=1}^{n}
-    w_i\,w_j\,
-    \bigl|\det J\bigr|\,
-    f\!\bigl(\mathbf{F}(\xi_i,\eta_j)\bigr).
-\]
-
-- \(\{\xi_i,w_i\}\) は \(\xi\) 方向のガウス点と重み、  
-- \(\{\eta_j,w_j\}\) は \(\eta\) 方向のガウス点と重みです。
+```math
+I \approx
+\sum_{i=1}^{n}\sum_{j=1}^{n}
+    w_i\,w_j\,\lvert\det J\rvert\,f(\mathbf{F}(\xi_i,\eta_j)).
+```
 
 **解説**：  
-独立した 2 回の 1 次元ガウス求積を二重和で評価し、ヤコビアンをかけるだけで高精度な 2 次元積分が得られます。
+1次元ガウス求積を2回適用し、二重和で評価します。ヤコビアンを掛ければ高精度な2次元積分が得られます。
+```
 
-
+こうしておけば、GitHub 上で Markdown として利用しやすい形式になります。
