@@ -18,7 +18,7 @@
 ## 1.1 基本公式
 
 $$
-\int_{-1}^{1} f(x)\,dx  \approx\  \sum_{i=1}^{n} w_i\,f(x_i) \qquad (1)
+\int_{-1}^{1} f(x) dx  \approx\  \sum_{i=1}^{n} w_i f(x_i) \qquad (1)
 $$
 
 **解説**：ガウス点 \(x_i\) は Legendre 多項式 \(P_n\) の零点、重み \(w_i\) は誤差最小になる係数。\(2n-1\) 次までの多項式で誤差ゼロ。
@@ -39,7 +39,7 @@ $$
 ## 2.1 変数変換
 
 $$
-\xi\in[-1,1],\quad x(\xi)=\frac{x_2-x_1}{2}\,\xi+\frac{x_1+x_2}{2}. \qquad (2)
+\xi\in[-1,1],\quad x(\xi)=\frac{x_2-x_1}{2} \xi+\frac{x_1+x_2}{2}. \qquad (2)
 $$
 
 ## 2.2 ヤコビアン
@@ -52,7 +52,7 @@ $$
 
 $$
 \boxed{\displaystyle
-\int_{x_1}^{x_2} f(x)\,dx  \approx\  J \sum_{i=1}^{n} w_i f\left(\tfrac{x_2-x_1}{2}\,\xi_i+\tfrac{x_1+x_2}{2}\right)
+\int_{x_1}^{x_2} f(x)dx  \approx\  J \sum_{i=1}^{n} w_i f\left(\tfrac{x_2-x_1}{2} \xi_i+\tfrac{x_1+x_2}{2}\right)
 }\qquad (4)
 $$
 
@@ -125,7 +125,7 @@ $$
 解析積分:
 
 $$
-\int_{0}^{2} (2x^2 + 3x + 1)\,dx = \left[\frac{2}{3}x^3 + \frac{3}{2}x^2 + x\right]_{0}^{2} = \frac{40}{3} \approx 13.333333333
+\int_{0}^{2} (2x^2 + 3x + 1) dx = \left[\frac{2}{3}x^3 + \frac{3}{2}x^2 + x\right]_{0}^{2} = \frac{40}{3} \approx 13.333333333
 $$
 
 ```python
@@ -190,13 +190,13 @@ print(approx)  # -> 13.333333333333334
 
 
 **解説**：  
-\(\,dy\,dx\) は物理空間の面積要素です。
+\( dy dx\) は物理空間の面積要素です。
 
 ---
 
 ## 4.3 変数変換とヤコビアンの導入
 
-参照空間の面積要素を \(d\xi\,d\eta\) とすると、
+参照空間の面積要素を \(d\xi d\eta\) とすると、
 
 ![image](https://github.com/user-attachments/assets/76c38997-08dd-48a3-8b79-530819634c1d)
 
