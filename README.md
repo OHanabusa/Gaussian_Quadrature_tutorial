@@ -159,9 +159,8 @@ print(approx)  # -> 13.333333333333334
 ## 4.1 座標の定義とヤコビアン行列
 
 - **物理空間の座標**  
-  ```math
-  \mathbf{x} = (x, y), \quad (x,y)\in [x_1, x_2]\times[y_1, y_2].
-  ```
+![image](https://github.com/user-attachments/assets/d1cea7d3-2b0d-4109-8ef1-5c9d0aeaf4eb)
+
 
 - **参照空間（パラメータ空間）の座標**  
 ![image](https://github.com/user-attachments/assets/eeee38fc-45e2-4e1b-b0d8-1f161ea55b3a)
@@ -169,22 +168,13 @@ print(approx)  # -> 13.333333333333334
 
 参照空間から物理空間へのアフィン一次写像を
 
-```math
-\mathbf{x} = \mathbf{F}(\boldsymbol{\xi}) = J\,\boldsymbol{\xi} + \mathbf{c},
-```
+![image](https://github.com/user-attachments/assets/b2bd1c28-39f6-4d9a-a128-94384c60ec70)
+
 
 として定義します。ここで
 
-```math
-J = \begin{pmatrix}
-\frac{x_2 - x_1}{2} & 0 \\
-0 & \frac{y_2 - y_1}{2}
-\end{pmatrix}, \quad
-\mathbf{c} = \begin{pmatrix}
-\frac{x_1 + x_2}{2} \\
-\frac{y_1 + y_2}{2}
-\end{pmatrix}.
-```
+![image](https://github.com/user-attachments/assets/cb9dd250-ed06-4933-a4b4-fc418a28e280)
+
 
 **解説**：  
 - 行列 \(\mathbf{J}\) の対角要素が \(x\)、\(y\) 方向のスケール変換を担い、  
@@ -196,9 +186,8 @@ J = \begin{pmatrix}
 
 物理空間の 2 重積分は、
 
-```math
-I = \int_{x_1}^{x_2}\int_{y_1}^{y_2} f(x,y)\,dy\,dx.
-```
+![image](https://github.com/user-attachments/assets/ae18f707-290a-45d2-8371-fc2ce10b454b)
+
 
 **解説**：  
 \(\,dy\,dx\) は物理空間の面積要素です。
@@ -209,13 +198,8 @@ I = \int_{x_1}^{x_2}\int_{y_1}^{y_2} f(x,y)\,dy\,dx.
 
 参照空間の面積要素を \(d\xi\,d\eta\) とすると、
 
-```math
-dx\,dy = \lvert\det J\rvert\,d\xi\,d\eta,
-```
+![image](https://github.com/user-attachments/assets/76c38997-08dd-48a3-8b79-530819634c1d)
 
-```math
-\det J = \frac{x_2 - x_1}{2}\times\frac{y_2 - y_1}{2}.
-```
 
 **解説**：  
 ヤコビアン \(\lvert\det J\rvert\) が面積スケールを補正し、参照空間の要素を物理空間に変換します。
@@ -226,11 +210,8 @@ dx\,dy = \lvert\det J\rvert\,d\xi\,d\eta,
 
 変換後の式は、
 
-```math
-I = \int_{-1}^{1}\int_{-1}^{1}
-    f\bigl(\mathbf{F}(\xi,\eta)\bigr)\,
-    \lvert\det J\rvert\,d\eta\,d\xi.
-```
+![image](https://github.com/user-attachments/assets/a46a468b-0033-491e-bd67-7cb179ee8398)
+
 
 **解説**：  
 - 関数 \(f\) は写像 \(\mathbf{F}(\xi,\eta)\) で評価され、  
@@ -242,59 +223,6 @@ I = \int_{-1}^{1}\int_{-1}^{1}
 
 参照空間上のガウス点 \(\{(\xi_i,w_i)\}\)、\(\{(\eta_j,w_j)\}\) を用いて、
 
-```math
-I \approx
-\sum_{i=1}^{n}\sum_{j=1}^{n}
-    w_i\,w_j\,\lvert\det J\rvert\,f\bigl(\mathbf{F}(\xi_i,\eta_j)\bigr).
-```
+![image](https://github.com/user-attachments/assets/d626cda3-50aa-4455-8df1-cb3b6dc2c3fd)
 
-**解説**：  
-1次元ガウス求積を2回適用し、二重和で評価します。ヤコビアンを掛けることで、高精度な2次元積分が得られます。
-```
-**解説**：  
-\(\,dy\,dx\) は物理空間の面積要素です。
 
----
-
-## 4.3 変数変換とヤコビアンの導入
-
-参照空間の面積要素を \(d\xi\,d\eta\) とすると、
-
-```math
-dx\,dy = \lvert\det J\rvert\,d\xi\,d\eta,
-```
-
-```math
-\det J = \frac{x_2 - x_1}{2}\times\frac{y_2 - y_1}{2}.
-```
-
-**解説**：  
-ヤコビアン \(\lvert\det J\rvert\) が面積スケールを補正し、参照空間の要素を物理空間に変換します。
-
----
-
-## 4.4 参照空間上の積分式
-
-変換後の式は、
-
-$$
-I = \int_{-1}^{1}\int_{-1}^{1}
-    f\bigl(\mathbf{F}(\xi,\eta)\bigr)\,
-    \lvert\det J\rvert\,d\eta\,d\xi.
-$$
-
-**解説**：  
-- 関数 \(f\) は写像 \(\mathbf{F}(\xi,\eta)\) で評価され、  
-- ヤコビアンで面積要素を補正します。
-
----
-
-## 4.5 2変数ガウス求積公式
-
-参照空間上のガウス点 \(\{(\xi_i,w_i)\}\)、\(\{(\eta_j,w_j)\}\) を用いて、
-
-```math
-I \approx
-\sum_{i=1}^{n}\sum_{j=1}^{n}
-    w_i\,w_j\,\lvert\det J\rvert\,f\bigl(\mathbf{F}(\xi_i,\eta_j)\bigr).
-```
