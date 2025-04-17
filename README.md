@@ -164,9 +164,8 @@ print(approx)  # -> 13.333333333333334
   ```
 
 - **参照空間（パラメータ空間）の座標**  
-  ```math
-  \boldsymbol{\xi} = (\xi, \eta), \quad (\xi,\eta)\in[-1,1]^2.
-  ```
+![image](https://github.com/user-attachments/assets/eeee38fc-45e2-4e1b-b0d8-1f161ea55b3a)
+
 
 参照空間から物理空間へのアフィン一次写像を
 
