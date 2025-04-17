@@ -52,7 +52,7 @@ $$
 
 $$
 \boxed{\displaystyle
-\int_{x_1}^{x_2} f(x)\,dx  \approx\  J\,\sum_{i=1}^{n} w_i\,f\left(\tfrac{x_2-x_1}{2}\,\xi_i+\tfrac{x_1+x_2}{2}\right)
+\int_{x_1}^{x_2} f(x)\,dx  \approx\  J \sum_{i=1}^{n} w_i f\left(\tfrac{x_2-x_1}{2}\,\xi_i+\tfrac{x_1+x_2}{2}\right)
 }\qquad (4)
 $$
 
