@@ -278,7 +278,7 @@ dx\,dy = \lvert\det J\rvert\,d\xi\,d\eta,
 
 変換後の式は、
 
-```math
+```
 I = \int_{-1}^{1}\int_{-1}^{1}
     f\bigl(\mathbf{F}(\xi,\eta)\bigr)\,
     \lvert\det J\rvert\,d\eta\,d\xi.
