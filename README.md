@@ -39,13 +39,13 @@ $$
 ## 2.1 変数変換
 
 $$
-\xi\in[-1,1],\quad x(\xi)=\frac{x_2-x_1}{2}\,\xi+\frac{x_1+x_2}{2}. \tag{2}
+\xi\in[-1,1],\quad x(\xi)=\frac{x_2-x_1}{2}\,\xi+\frac{x_1+x_2}{2}. \qquad (2)
 $$
 
 ## 2.2 ヤコビアン
 
 $$
-\frac{dx}{d\xi}=\frac{x_2-x_1}{2}=J. \tag{3}
+\frac{dx}{d\xi}=\frac{x_2-x_1}{2}=J. \qquad (3)
 $$
 
 ## 2.3 一般区間用ガウス求積
