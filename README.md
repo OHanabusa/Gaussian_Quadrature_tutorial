@@ -160,7 +160,7 @@ print(approx)  # -> 13.333333333333334
 
 ---
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/b006d14a-a81b-4eda-9712-30cb7a8f13ce)
 
 
 ## 4.1 座標の定義とヤコビアン行列
