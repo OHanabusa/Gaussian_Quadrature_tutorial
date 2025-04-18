@@ -160,7 +160,6 @@ print(approx)  # -> 13.333333333333334
 
 ---
 
-![image](https://github.com/user-attachments/assets/b006d14a-a81b-4eda-9712-30cb7a8f13ce)
 
 
 ## 4.1 座標の定義とヤコビアン行列
@@ -182,6 +181,7 @@ print(approx)  # -> 13.333333333333334
 
 ![image](https://github.com/user-attachments/assets/cb9dd250-ed06-4933-a4b4-fc418a28e280)
 
+![image](https://github.com/user-attachments/assets/b006d14a-a81b-4eda-9712-30cb7a8f13ce)
 
 **解説**：  
 - 行列 **J** の対角要素が 𝜉・𝜂 方向のスケール変換を担い、  
