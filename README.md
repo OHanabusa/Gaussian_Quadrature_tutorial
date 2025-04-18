@@ -213,51 +213,32 @@ print(approx)  # -> 13.333333333333334
 
 ---
 
-以下、物理空間上の二重積分から参照空間上でのガウス求積公式への展開を，ステップ・バイ・ステップで Markdown 形式にまとめる。  
-
----
-
 ## 4.4 参照空間上への積分式
 
 以上を用いて，積分 \(I\) は参照空間上に写像される：
-```math
-I
-= \int_{x_1}^{x_2}\int_{y_1}^{y_2} f(x,y)\,\mathrm{d}y\,\mathrm{d}x
-= \int_{-1}^{1}\int_{-1}^{1} f\bigl(\mathbf{F}(\xi,\eta)\bigr)\,|\det J|\,\mathrm{d}\eta\,\mathrm{d}\xi.
-```
+![image](https://github.com/user-attachments/assets/5b8cd0e3-7dfd-447b-8c13-5f7518f0ca70)
+
 
 ---
 
 ## 4.5 1次元ガウス求積法の適用
 
 - 1次元ガウス–ルジャンドル求積法（\(n\) 点）では，
-  ```math
-  \int_{-1}^{1} g(\xi)\,\mathrm{d}\xi
-  \approx \sum_{i=1}^{n} w_i\,g(\xi_i),
-  ```
+![image](https://github.com/user-attachments/assets/16aaa1fa-292b-4ad9-a9ac-d8f2237f575f)
+
   ただし \(\xi_i\) はガウス点，\(w_i\) は対応する重み。
 
 - 二重積分の場合，\(\xi\) と \(\eta\) のそれぞれに同じ \(n\) 点ガウス求積を適用すると，
-  ```math
-  \int_{-1}^{1}\!\!\int_{-1}^{1} h(\xi,\eta)\,\mathrm{d}\eta\,\mathrm{d}\xi
-  \approx
-  \sum_{i=1}^{n}\sum_{j=1}^{n}
-    w_i\,w_j\,
-    h(\xi_i,\eta_j).
-  ```
+![image](https://github.com/user-attachments/assets/71ec5f09-9149-403c-95f8-773a99a1de86)
+
 
 ---
 
 ## 4.6  最終的なガウス求積公式
 
 参照空間上の積分式に上記を適用すると，
-```math
-I
-\approx
-\sum_{i=1}^{n}\sum_{j=1}^{n}
-w_i\,w_j\,|\det J|\,
-f\bigl(\mathbf{F}(\xi_i,\eta_j)\bigr).
-```
+![image](https://github.com/user-attachments/assets/8ead7123-dc78-4d3a-a747-2caf4c496693)
+
 
 以上が，元の二重積分から参照空間上のガウス求積公式への導出過程である。
 
