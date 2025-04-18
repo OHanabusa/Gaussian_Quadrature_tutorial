@@ -230,130 +230,115 @@ print(approx)  # -> 13.333333333333334
 ![image](https://github.com/user-attachments/assets/d626cda3-50aa-4455-8df1-cb3b6dc2c3fd)
 
 ---
-title: "2変数ガウス求積法の実装と演習"
-blocks:
-  - type: markdown
-    text: |
-      # 2変数ガウス求積法の実装例
-      以下のページでは、Python と `numpy` を用いて任意の長方形領域上の 2 変数積分をガウス–ルジャンドル求積で計算する関数 `two_dim_gauss` を実装します。
 
-  - type: code
-    language: python
-    text: |
-      import numpy as np
+# 4章 │ Python 実装テンプレート（2変数対応・任意区間）
 
-      def gauss_legendre(n):
-          """
-          n 次の 1次元ガウス–ルジャンドル求積のノードと重みを返す。
-          """
-          xi, wi = np.polynomial.legendre.leggauss(n)
-          return xi, wi
+以下のテンプレートは任意の長方形区間 `[a,b]×[c,d]` での 2変数ガウス–ルジャンドル求積を実装する雛形です。
+空欄を埋めて完成させ、理論式との対応を確認してください。
 
-      def two_dim_gauss(f, a, b, c, d, n):
-          """
-          2変数関数 f(x,y) を [a,b]×[c,d] 上で n×n ガウス求積で近似する。
+```python
+import numpy as np
 
-          Parameters
-          ----------
-          f : callable
-              積分する関数 f(x,y)
-          a, b : float
-              x の積分区間 [a,b]
-          c, d : float
-              y の積分区間 [c,d]
-          n : int
-              各軸の求積点数
+# === Gauss-Legendre データ: n 点数 → (ガウス点リスト, 重みリスト) ===
+gauss_data = {
+    2: ([-0.577350269189626,  0.577350269189626], [1.0, 1.0]),
+    3: ([-0.774596669241483,  0.0,  0.774596669241483],
+        [0.555555555555556, 0.888888888888889, 0.555555555555556]),
+    4: ([-0.861136311594053, -0.339981043584856,
+          0.339981043584856,  0.861136311594053],
+        [0.347854845137454, 0.652145154862546,
+         0.652145154862546, 0.347854845137454]),
+    5: ([-0.906179845938664, -0.538469310105683, 0.0,
+          0.538469310105683,  0.906179845938664],
+        [0.236926885056189, 0.478628670499366, 0.568888888888889,
+         0.478628670499366, 0.236926885056189]),
+}
 
-          Returns
-          -------
-          float
-              積分値の近似
-          """
-          xi, wi = gauss_legendre(n)
-          eta, wj = xi, wi
-
-          # アフィン変換によるヤコビアンの行列式
-          J_det = (b - a) * (d - c) / 4.0
-
-          I = 0.0
-          for i in range(n):
-              x = (b + a)/2 + (b - a)/2 * xi[i]
-              for j in range(n):
-                  y = (d + c)/2 + (d - c)/2 * eta[j]
-                  I += wi[i] * wj[j] * f(x, y)
-
-          return I * J_det
-
-      # --- 使用例 ---
-      if __name__ == "__main__":
-          # f(x,y) = x^2 + y^2 を [-1,1]×[-1,1] で積分
-          f = lambda x, y: x**2 + y**2
-          val = two_dim_gauss(f, -1, 1, -1, 1, n=3)
-          print("∫_{-1}^{1}∫_{-1}^{1} (x^2+y^2) dx dy ≈", val)
-
-  - type: markdown
-    text: |
-      ## 演習問題
-      以下の 3 問を解いて、実装を確認しましょう。
-
-      ### 問題 1
-      
-      \[\iint_{[-1,1]^2} (x^2 + y^2)\,dx\,dy\] を n=2, n=3 のガウス求積で計算し、理論値と比較せよ。
-
-      ### 問題 2
-      
-      \[\iint_{[0,1]\times[0,2]} e^{x+y}\,dx\,dy\] を n=3 のガウス求積で近似せよ。
-
-      ### 問題 3
-      
-      \[\iint_{[1,2]\times[0,1]} x\,y\,dx\,dy\] を n=2 のガウス求積で近似せよ。
-
-  - type: markdown
-    text: |
-      ## 解答例
-
-      ### 問題 1 の解答
-      - 理論値：
-        \[
-          \int_{-1}^1 x^2 dx = \tfrac{2}{3},\quad
-          \int_{-1}^1 y^2 dy = \tfrac{2}{3},
-        \]
-        よって
-        \[
-          \iint (x^2+y^2)\,dA
-          = 2\times\tfrac{2}{3} + 2\times\tfrac{2}{3}
-          = \tfrac{8}{3} \approx 2.6667.
-        \]
-      - ガウス求積：
-        ```python
-        two_dim_gauss(lambda x,y: x**2+y**2, -1,1,-1,1,2)
-        two_dim_gauss(lambda x,y: x**2+y**2, -1,1,-1,1,3)
-        ```
-        いずれも ≈ 2.6667
-
-      ### 問題 2 の解答
-      - 理論値：
-        \[
-          (e^2-1)(e-1) \approx 10.966
-        \]
-      - ガウス求積 (n=3)：
-        ```python
-        two_dim_gauss(lambda x,y: np.exp(x+y), 0,1,0,2,3)
-        ```
-        ≈ 10.966
-
-      ### 問題 3 の解答
-      - 理論値：
-        \[
-          \int_1^2 x dx = \tfrac{3}{2},\quad
-          \int_0^1 y dy = \tfrac{1}{2},
-        \]
-        よって 0.75
-      - ガウス求積 (n=2)：
-        ```python
-        two_dim_gauss(lambda x,y: x*y, 1,2,0,1,2)
-        ```
-        ≈ 0.75
+def gauss_legendre(n):
+    """
+    ガウス点と重みを返す（n=2～5）
+    """
+    if n not in gauss_data:
+        raise ValueError(f"サポート外の n={n} です (2～5)")
+    xg, wg = gauss_data[n]
+    return np.array(xg), np.array(wg)
 
 
+def two_dim_gauss(f, a, b, c, d, n):
+    """
+    [a,b]×[c,d] の長方形領域で n×n ガウス求積を行う。
+    対応する理論式:
+      1) 変数変換 (式 4.3): x = (b+a)/2 + (b−a)/2 * ξ_i
+      2) 変数変換 (式 4.3): y = (d+c)/2 + (d−c)/2 * η_j
+      3) 加重和        (式 4.5): Σ_i Σ_j w_i w_j f(x,y)
+      4) ヤコビアン   (式 4.4): detJ = (b−a)(d−c)/4 の乗算
+
+    ★★ 以下を埋めて実装を完成させよ ★★
+    """
+    # 1) 1次元ノードと重み取得
+    xi, wi = gauss_legendre(n)
+    eta, wj = xi, wi
+
+    # 2) ヤコビアン (式 4.4)
+    detJ = ...  # TODO: (b - a)*(d - c)/4
+
+    I = 0.0
+    # 3) 二重ループで加重和 (式 4.5)
+    for i in range(n):
+        # 3-1) x 変数変換 (式 4.3)
+        x = ...  # TODO: (b + a)/2 + (b - a)/2 * xi[i]
+        for j in range(n):
+            # 3-2) y 変数変換 (式 4.3)
+            y = ...  # TODO: (d + c)/2 + (d - c)/2 * eta[j]
+            # 3-3) 項の加算
+            I += ...  # TODO: wi[i] * wj[j] * f(x, y)
+
+    # 4) 出力 (式 4.4)
+    return ...  # TODO: detJ * I
+
+if __name__ == "__main__":
+    # 演習問題とその計算結果を表示
+    print("問題 1: ∬_{[-1,1]^2} (x^2 + y^2) dA")
+    f1 = lambda x, y: x**2 + y**2
+    n1 = 2
+    approx = two_dim_gauss(f1, -1, 1, -1, 1, n1)
+    print(f"  n={n1}: {approx:.6f}")
+    print("  理論値: 8/3 ≈ 2.666667")
+    if abs(approx - 8/3) > 1e-6:
+        print(f"  警告: n={n1} の近似値と理論値の差異が 1e-6 より大きい: {abs(approx - 8/3)}")
+    else:
+        print("問題1：成功")
+
+    print("\n問題 2: ∬_{[0,1]×[0,2]} e^(x+y) dA")
+    f2 = lambda x, y: np.exp(x + y)
+    n2 = 5
+    approx2 = two_dim_gauss(f2, 0, 1, 0, 2, n2)
+    print(f"  n={n2}: {approx2:.6f}")
+    print(f"  理論値: (e^2 - 1)(e - 1) ≈ {(np.e**2 - 1)*(np.e - 1):.6f}")
+    if abs(approx2 - (np.e**2 - 1)*(np.e - 1)) > 1e-6:
+        print(f"  警告: n={n2} の近似値と理論値の差異が 1e-6 より大きい: {abs(approx2 - (np.e**2 - 1)*(np.e - 1))}")
+    else:
+        print("問題2：成功")
+
+    print("\n問題 3: ∬_{[1,2]×[0,1]} x*y dA")
+    f3 = lambda x, y: x * y
+    n3 = 2
+    approx3 = two_dim_gauss(f3, 1, 2, 0, 1, n3)
+    print(f"  n={n3}: {approx3:.6f}")
+    print("  理論値: 3/4 = 0.75")
+    if abs(approx3 - 3/4) > 1e-6:
+        print(f"  警告: n={n3} の近似値と理論値の差異が 1e-6 より大きい: {abs(approx3 - 3/4)}")
+    else:
+        print("問題3：成功")
+```
+
+> **埋め方ガイド**
+>
+> 1. `detJ` にヤコビアンを設定: `(b - a) * (d - c) / 4`
+> 2. `x` には `(b + a)/2 + (b - a)/2 * xi[i]`
+> 3. `y` には `(d + c)/2 + (d - c)/2 * eta[j]`
+> 4. `I +=` の部分に `wi[i] * wj[j] * f(x, y)` を記述
+> 5. 関数の戻り値は `detJ * I`
+
+---
 
