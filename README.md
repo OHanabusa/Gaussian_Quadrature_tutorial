@@ -172,7 +172,7 @@ print(approx)  # -> 13.333333333333334
 ![image](https://github.com/user-attachments/assets/eeee38fc-45e2-4e1b-b0d8-1f161ea55b3a)
 
 
-参照空間から物理空間へのアフィン一次写像を
+参照空間から物理空間への線形写像を
 
 ![image](https://github.com/user-attachments/assets/b2bd1c28-39f6-4d9a-a128-94384c60ec70)
 
@@ -271,10 +271,10 @@ def two_dim_gauss(f, a, b, c, d, n):
     """
     [a,b]×[c,d] の長方形領域で n×n ガウス求積を行う。
     対応する理論式:
-      1) 変数変換 (式 4.3): x = (b+a)/2 + (b−a)/2 * ξ_i
-      2) 変数変換 (式 4.3): y = (d+c)/2 + (d−c)/2 * η_j
-      3) 加重和        (式 4.5): Σ_i Σ_j w_i w_j f(x,y)
-      4) ヤコビアン   (式 4.4): detJ = (b−a)(d−c)/4 の乗算
+      1) 変数変換 : x = (b+a)/2 + (b−a)/2 * ξ_i
+      2) 変数変換 : y = (d+c)/2 + (d−c)/2 * η_j
+      3) 加重和   : Σ_i Σ_j w_i w_j f(x,y)
+      4) ヤコビアン  : detJ = (b−a)(d−c)/4 の乗算
 
     ★★ 以下を埋めて実装を完成させよ ★★
     """
@@ -282,19 +282,19 @@ def two_dim_gauss(f, a, b, c, d, n):
     xi, wi = gauss_legendre(n)
     eta, wj = xi, wi
 
-    # 2) ヤコビアン (式 4.4)
-    detJ = ...  # TODO: (b - a)*(d - c)/4
+    # 2) ヤコビアン 
+    detJ = ...  # TODO
 
     I = 0.0
-    # 3) 二重ループで加重和 (式 4.5)
+    # 3) 二重ループで加重和 
     for i in range(n):
-        # 3-1) x 変数変換 (式 4.3)
-        x = ...  # TODO: (b + a)/2 + (b - a)/2 * xi[i]
-        for j in range(n):
-            # 3-2) y 変数変換 (式 4.3)
-            y = ...  # TODO: (d + c)/2 + (d - c)/2 * eta[j]
+        # 3-1) x 変数変換 
+        x = ...  # TODO: 
+        for j in range(n)
+            # 3-2) y 変数変換 
+            y = ...  # TODO
             # 3-3) 項の加算
-            I += ...  # TODO: wi[i] * wj[j] * f(x, y)
+            I += ...  # TODO
 
     # 4) 出力 (式 4.4)
     return ...  # TODO: detJ * I
@@ -314,7 +314,7 @@ if __name__ == "__main__":
 
     print("\n問題 2: ∬_{[0,1]×[0,2]} e^(x+y) dA")
     f2 = lambda x, y: np.exp(x + y)
-    n2 = 5
+    n2 = 2
     approx2 = two_dim_gauss(f2, 0, 1, 0, 2, n2)
     print(f"  n={n2}: {approx2:.6f}")
     print(f"  理論値: (e^2 - 1)(e - 1) ≈ {(np.e**2 - 1)*(np.e - 1):.6f}")
